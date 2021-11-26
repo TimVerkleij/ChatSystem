@@ -20,7 +20,11 @@ const wss = new WebSocketServer({ port: 6969 });
 
 wss.on('connection', function connection(ws) {
 	ws.on('message', function message(data) {
-        
+        wss.clients.forEach(ws => {
+            let response = JSON.parse(data)
+            // console.log(response)
+            ws.send(JSON.stringify(response))
+        });
 
 	});
 

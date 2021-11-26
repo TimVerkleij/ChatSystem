@@ -8,6 +8,7 @@
     height: 60px;
     background-color: lightblue;
     position: fixed;
+    z-index: 5;
 }
 
 #name {
@@ -18,4 +19,63 @@
     margin-right: auto;
     margin-top: 10px;
     display: block;
+}
+
+.messages {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: green;
+    bottom: 50px;
+    z-index: -10;
+}
+
+.sendMessage {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+}
+
+#message {
+    width: 60%;
+    margin: 5px;
+    float: right;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.messageDiv {
+    background-color: red;
+    width: 100%;
+    height: 89%;
+    position: absolute;
+    bottom: 0;
+    top: 110px;
+    overflow-y: scroll;
+}
+
+.messageBox {
+    width: min-content;
+    height: min-content;
+    border-radius: 10px;
+    width: max-content;
+    min-width: 200px;
+    max-width: 600px;
+    background-color: rgb(130, 212, 6);
+    position: relative;
+    margin: 10px;
+    padding: 10px;
+}
+
+.username {
+    font-weight: bold;
+    color: black;
+}
+
+.userMessage {
+    color: black;
+    font-style: oblique;
 }

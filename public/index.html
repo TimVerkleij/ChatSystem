@@ -1,26 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Document</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="index.css">
+        <title>Document</title>
+    </head>
 
-<body>
-    <div class="top-bar">
-        <input type="text" name="name" id="name">
-    </div>
-</body>
-<script>
+    <body>
+        <div class="top-bar">
+            <input type="text" name="name" id="name">
+        </div>
+        <div class="messages">
+            <div class="messageDiv" id="messageDiv">
+                <div class="messageBox">
+                    <p class="username">Ivar</p>
+                    <p class="userMessage">Onzin</p>
+                </div>
+            </div>
+            <div class="sendMessage">
+                <input type="text" name="message" id="message">
+            </div>
+        </div>
+    </body>
+    <script>
 
-    let ws = new WebSocket("ws://localhost:6969")
 
-    ws.onmessage = (event => {
-        
-    })
-</script>
+        let ws = new WebSocket("ws://localhost:6969")
+
+        ws.onmessage = (event => {
+            let response = JSON.parse(event.data)
+            // console.log(response)
+            let messageDiv = document.getElementById("messageDiv")
+            let messageBox = document.createElement("div")
+            let usernameBox = document.createElement("p")
+            let newMessage = document.createElement("p")
+            usernameBox.innerHTML = response.username
+            usernameBox.className = "username"
+            newMessage.innerHTML = response.message
+            newMessage.className = "userMessage"
+            messageBox.append(usernameBox)
+            messageBox.append(newMessage)
+            messageBox.className = "messageBox"
+            messageDiv.append(messageBox)
+        })
+
+
+        let input = document.getElementById("message")
+        let username = document.getElementById("name")
+
+        input.addEventListener("keyup", (event) => { // console.log(input)
+            if (event.key === "Enter") {
+                if (input.value && username.value) {
+                    ws.send(JSON.stringify({"username": username.value, "message": input.value}))
+                    input.value = ""
+                } else {
+                    alert("please enter a name and message")
+                }
+
+            }
+        })
+    </script>
 
 </html>
