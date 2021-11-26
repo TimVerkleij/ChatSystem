@@ -20,26 +20,7 @@ const wss = new WebSocketServer({ port: 6969 });
 
 wss.on('connection', function connection(ws) {
 	ws.on('message', function message(data) {
-		// let response = JSON.parse(data)
-		// // console.log(response)
-
-		// let id = response.clientID
-
-		// switch (response.action) {
-		// 	case "Start":
-		// 		startTime = new Date().getTime()
-		// 		stopTime = null
-		// 		timers[`${id}`] = { startTime, stopTime }
-		// 		break
-		// 	case "Stop":
-		// 		stopTime = new Date().getTime()
-		// 		timers[`${id}`].stopTime = stopTime
-		// 		break
-		// }
-
-		// console.log(timers)
-
-
+        
 
 	});
 
