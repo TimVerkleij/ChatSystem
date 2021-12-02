@@ -26,9 +26,10 @@
         </div>
     </body>
     <script>
+        var host = location.origin.replace(/^http/, 'ws')
+        var ws = new WebSocket(host);
 
-
-        let ws = new WebSocket("ws://localhost:6969")
+        // let ws = new WebSocket("ws://localhost:6969")
 
         ws.onmessage = (event => {
             let response = JSON.parse(event.data)
