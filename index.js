@@ -2,10 +2,11 @@ const Express = require('express')
 const bodyParser = require('body-parser')
 
 const app = Express()
-const PORT = 8080
 
 const dotenv = require('dotenv')
-dotenv.config();
+dotenv.config({ path: './process.env' });
+
+const PORT = process.env.PORT
 
 app.use(bodyParser())
 // app.use(require('./routes/api'))
@@ -16,7 +17,7 @@ const { WebSocketServer } = require('ws')
 
 let timers = {}
 
-const wss = new WebSocketServer({ port: 6969 });
+const wss = new WebSocketServer({ port: process.env.WSPORT });
 
 wss.on('connection', function connection(ws) {
 	ws.on('message', function message(data) {
