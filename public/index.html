@@ -33,6 +33,7 @@
 
         ws.onclose = (event => {
             console.log('websocket connection lost')
+            ws = new WebSocket(host);
         })
 
         ws.onmessage = (event => {
@@ -59,13 +60,7 @@
         input.addEventListener("keyup", (event) => { // console.log(input)
             if (event.key === "Enter") {
                 if (input.value && username.value) {
-                    try {
-                        ws.send(JSON.stringify({"username": username.value, "message": input.value}))
-                    } catch {
-                        host = location.origin.replace(/^http/, 'ws')
-                        alert("Connection to host was lost, you've been reconnected ;)")
-                    } 
-                    
+                    ws.send(JSON.stringify({"username": username.value, "message": input.value}))
                     input.value = ""
                 } else {
                     alert("please enter a name and message")
