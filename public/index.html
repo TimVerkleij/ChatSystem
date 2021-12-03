@@ -33,6 +33,7 @@
 
         ws.onclose = (event => {
             console.log('websocket connection lost')
+            ws.close()
             ws = new WebSocket(host);
         })
 
