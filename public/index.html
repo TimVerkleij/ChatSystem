@@ -14,11 +14,11 @@
             <input type="text" name="name" id="name">
         </div>
         <div class="messages">
-            <div class="messageDiv" id="messageDiv">
-                <!-- <div class="messageBox">
-                    <p class="username">Ivar</p>
-                    <p class="userMessage">Onzin</p>
-                </div> -->
+            <div
+                class="messageDiv" id="messageDiv"><!-- <div class="messageBox">
+                                        <p class="username">Ivar</p>
+                                        <p class="userMessage">Onzin</p>
+                                    </div> -->
             </div>
             <div class="sendMessage">
                 <input type="text" name="message" id="message">
@@ -30,6 +30,10 @@
         var ws = new WebSocket(host);
 
         // let ws = new WebSocket("ws://localhost:6969")
+
+        ws.onclose = (event => {
+            console.log('websocket connection lost')
+        })
 
         ws.onmessage = (event => {
             let response = JSON.parse(event.data)
@@ -55,14 +59,21 @@
         input.addEventListener("keyup", (event) => { // console.log(input)
             if (event.key === "Enter") {
                 if (input.value && username.value) {
-                    ws.send(JSON.stringify({"username": username.value, "message": input.value}))
+                    try {
+                        ws.send(JSON.stringify({"username": username.value, "message": input.value}))
+                    } catch {
+                        host = location.origin.replace(/^http/, 'ws')
+                        alert("Connection to host was lost, you've been reconnected ;)")
+                    } 
+                    
                     input.value = ""
                 } else {
                     alert("please enter a name and message")
                 }
 
             }
-        })
-    </script>
+        })</script>
 
+    </html>
+    </html>
 </html>
